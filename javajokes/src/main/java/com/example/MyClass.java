@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class MyClass {
 
-    public static String getJoke(){
+    public String getJoke(){
         String[] jokeArray = {"A", "B", "C"};
         int random = new Random().nextInt(jokeArray.length);
         String str = jokeArray[random];
