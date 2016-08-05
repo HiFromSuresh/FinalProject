@@ -3,13 +3,17 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.test.AndroidTestCase;
+import android.util.Log;
 import android.util.Pair;
 
 import java.util.concurrent.ExecutionException;
 
 public class AsyncTaskTest extends AndroidTestCase {
 
-    public void AsyncTest() {
+    public static final String TAG = AsyncTaskTest.class.getName();
+
+    public void testAsync() {
+        Log.d(TAG, "Running test");
         String result = null;
         AsyncTask<Pair<Context, String>, Void, String> endpointAsync = new EndpointsAsync.EndpointsAsyncTask()
                 .execute(new Pair<Context, String>(getContext(), "Manfred"));
