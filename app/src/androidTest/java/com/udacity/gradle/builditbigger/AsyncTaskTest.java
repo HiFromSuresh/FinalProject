@@ -25,6 +25,8 @@ public class AsyncTaskTest extends AndroidTestCase {
             e.printStackTrace();
         }
         assertNotNull(result);
+        Log.d(TAG, result);
+
     }
 
 }
