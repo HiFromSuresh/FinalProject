@@ -40,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(View view){
+    public void tellJoke(View view) {
         new EndpointsAsync.EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
     }
 
