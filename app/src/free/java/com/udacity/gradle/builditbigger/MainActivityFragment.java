@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -24,6 +25,7 @@ public class MainActivityFragment extends Fragment {
 
     InterstitialAd mInterstitialAd;
     Button btnJoke;
+    ProgressBar progressBar;
 
     public MainActivityFragment() {
     }
@@ -32,7 +34,10 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
+
         btnJoke = (Button) root.findViewById(telljoke_btn);
+        progressBar = (ProgressBar) root.findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.GONE);
 
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
@@ -80,6 +85,15 @@ public class MainActivityFragment extends Fragment {
     }
 
     public void tellJoke() {
+        progressBar.setVisibility(View.VISIBLE);
         new EndpointsAsync.EndpointsAsyncTask().execute(new Pair<Context, String>(getActivity(), "Manfred"));
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(progressBar != null){
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }

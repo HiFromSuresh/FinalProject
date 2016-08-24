@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 
 /**
@@ -15,6 +16,7 @@ import android.widget.Button;
  */
 public class MainActivityFragment extends Fragment {
     Button btnJoke;
+    ProgressBar progressBar;
 
     public MainActivityFragment() {
     }
@@ -24,10 +26,13 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
         btnJoke = (Button) root.findViewById(R.id.telljoke_btn);
+        progressBar = (ProgressBar) root.findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.GONE);
 
         btnJoke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 new EndpointsAsync.EndpointsAsyncTask().execute(new Pair<Context, String>(getActivity(), "Manfred"));
             }
         });
@@ -35,4 +40,11 @@ public class MainActivityFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(progressBar != null){
+            progressBar.setVisibility(View.GONE);
+        }
+    }
 }
